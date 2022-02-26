@@ -1,0 +1,9 @@
+#+TITLE: My Doom Emacs Writing Set Up
+
+
+* Introduction
+This is version 2 of my Emacs Writing Setup, following my adoption of Doom Emacs. You can find the legacy version here: [[file:EmacsWritingTips.org]]
+
+My Doom config, together with my reasons for adopting Doom Emacs can be found here: [[https://github.com/ballantony/doom-emacs-config]]
+
+
