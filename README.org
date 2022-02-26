@@ -1,2 +1,11 @@
-# emacs-writing
-My Emacs Writing Setup
+#+TITLE: My Emacs Writing Setup
+
+This is the new home for My Emacs Writing Setup.
+
+This is version 2 of my setup, following my adoption of Doom Emacs. You can find the legacy version here: [[file:EmacsWritingTips.org]]
+
+The new version can be found here: [[file:DoomEmacsWriting.org]]
+
+My Doom config, together with my reasons for adopting Doom Emacs can be found here: [[https://github.com/ballantony/doom-emacs-config]]
+
+
