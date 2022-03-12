@@ -1,5 +1,16 @@
 #+TITLE: My Doom Emacs Writing Set Up
 
+#+options: ':t *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+author: Tony Ballantyne
+#+email: tony@tonyballantyne.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 27.1 (Org mode 9.6)
+#+cite_export:
 
 * Introduction
 This is version 2 of my Emacs Writing Setup, following my adoption of Doom Emacs. You can find the legacy version here: [[file:EmacsWritingTips.org]]
@@ -53,3 +64,6 @@ Enter Doom Emacs. So what if the TODOs are a different colour to the ones I use,
 Most of all, [[https://github.com/hlissner][Henrik Lissner]] knows so much more about Emacs than I. I’ve learned so much simply tracking through his code. I wasn’t aware of Vertico until it turned up in the Doom config. I don’t have the time or inclination to try out all new Emacs packages. It’s great that someone else is doing this, and if I don’t like their choices, well, Doom is flexible enough for me to change them.
 
 One final observation. Doom Emacs is fast to load. This is important to me. I like to take notes or begin writing when inspiration strikes. I can open Doom Emacs (or Orgzly on my mobile phone) and take a note in the time it takes apps such as Evernote or Notion to load.
+* TODO Setup
+
+* TODO Structuring a Story
