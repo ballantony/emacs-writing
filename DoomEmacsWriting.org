@@ -64,6 +64,109 @@ Enter Doom Emacs. So what if the TODOs are a different colour to the ones I use,
 Most of all, [[https://github.com/hlissner][Henrik Lissner]] knows so much more about Emacs than I. I’ve learned so much simply tracking through his code. I wasn’t aware of Vertico until it turned up in the Doom config. I don’t have the time or inclination to try out all new Emacs packages. It’s great that someone else is doing this, and if I don’t like their choices, well, Doom is flexible enough for me to change them.
 
 One final observation. Doom Emacs is fast to load. This is important to me. I like to take notes or begin writing when inspiration strikes. I can open Doom Emacs (or Orgzly on my mobile phone) and take a note in the time it takes apps such as Evernote or Notion to load.
-* TODO Setup
+* Setup
+Instructions on how to set up Emacs and Org-mode appear on the Emacs Setup Section of my website [[https://tech.tonyballantyne.com/emacs-workout/emacs-setup/][Tony Ballantyne Tech]]
 
-* TODO Structuring a Story
+Doom Emacs provides comprehensive installation instructions here: https://github.com/hlissner/doom-emacs#install
+* Structure of story
+I begin a story by creating an org mode file with something like the following structure:
+
+
+#+begin_src
+ * Captured
+ * Meta
+ * Outline
+ * Styles
+ * Ideas
+ * Characters
+ * EKs
+ * Worldbuilding
+ * Scenes
+ * Story
+#+end_src
+
+The above structure has evolved over the years. I imagine it will continue to change in the future.
+
+- /Captured/ is a list of things to be refiled later, captured to the buffer using this function.
+- /Meta/ contains such things as themes, notes for blurbs, possible quotations for publicity, title ideas
+- /Outline/ contains the shape of the story as it is at the time.  This gets rewritten as I go on.  It also acts as a reminder of what I've done so far
+- /Styles/ are there to remind me just how I wrote things out e.g. Daddy Bear, not Daddy bear.
+- /Ideas/ are ideas that may or may not be included in the story.
+- /Characters/ I don't make extensive character notes as I believe characters should grow organically. I do keep reminders about details such as age, partner's name
+- /EKs/ Eyeball Kicks
+- /Worldbuilding/ Everything from cities to buildings to alien races
+- /Scenes/ Scenes that may be included in the story
+- /Story/ The story itself
+
+Here's an example of what a story might look like. Different types of stories have different sections.  My Penrose novels ([[https://www.tonyballantyne.com/the-penrose-series.html][The Penrose Series]]), for example, have sections dealing with Robot physiology.
+
+#+BEGIN_SRC org
+ * Captured
+ * Meta
+ ** Goldilocks gets away with it again
+ ** Links to Fairy Tales world
+ * Outline
+ ** Bears make porridge, go into woods
+ ** Goldilocks arrives, eats the porridge, falls asleep
+ ** Bears return. Find Goldilocks, threaten to eat her
+ ** Big Bad Wolf saves the day
+ * Styles
+ ** Daddy Bear
+ * Ideas
+ ** Bears have an invisible motorbike
+ ** Daddy Bear once served time in prison for bearslaughter
+ * Characters
+ ** Daddy Bear (38)
+ - Brown fur, brown eyes.
+ - Biggest bear.  Gruff.
+ ** Mummy Bear (39)
+ - Black fur, golden eyes.
+ - Clever, sarcastic
+ * Worldbuilding
+ ** Hundred Hectare Wood
+ *** Elm trees rising above the oaks.
+ ** Cabin
+ *** Built of wood.  Three rooms.  Enter directly into main room, no hallway.
+ * Scenes
+ ** Who's been eating my porridge?
+ ** Then I'll huff and I'll puff and I'll blow your greenhouse down
+ * Story
+ ** Episode 1
+ Once upon a time there were three bears.  Mummy Bear, Daddy Bear, Baby Bear etc...
+#+END_SRC
+
+Some things to note:
+
+- I always write down the age of my characters: it helps to fix them in my mind
+- I try to keep the outline section up to date as I write.  It helps to remind me of any changes I've made.
+* Capture and Refile
+** Capturing Notes
+Like any writer I'm always capturing ideas. I used to carry a notebook everywhere, now I capture ideas on my phone using either orgzly or Evernote.
+
+When working in Emacs I use org-capture.
+
+GTD means capturing ideas quickly. I used to have templates to capture to different locations, I realised that this was an unnecessary step. Now I either capture everything as a TODO, either directly to my gtd file, or directly to the story file I'm currently working on.
+
+As org-capture requires you to select a template I wrote the following two functions. The first calls org-capture with the 't' template preselected, the second does the same but uses let* to change org-capture-templates to the current buffer for the current capture only.
+
+#+begin_src lisp
+(defun tb/capture ()
+    "Capture to do without options"
+    (interactive)
+    (org-capture nil "t"))
+
+  (defun tb/capture-to-this-buffer ()
+    "Capture note to this buffer"
+    (interactive)
+    (cond  ((not  (eq major-mode 'org-mode))
+            (message "Can't capture to non org-mode buffer"))
+           (t
+            (let* ((this-file buffer-file-name)
+                   (org-capture-templates
+                    `(("t" "Todo" entry (file+headline ,this-file "Captured")
+                       "** TODO %?"))))
+              (org-capture)))))
+#+end_src
+
+** Refiling Notes
+org-refile makes it easy to refile notes, particularly with a completion system like Vertico. On Doom Emacs this means hitting SPC m r r
