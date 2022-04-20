@@ -170,3 +170,98 @@ As org-capture requires you to select a template I wrote the following two funct
 
 ** Refiling Notes
 org-refile makes it easy to refile notes, particularly with a completion system like Vertico. On Doom Emacs this means hitting SPC m r r
+
+* Global, Workspace, Project, File
+I used to use [[https://github.com/ballantony/scriv-mode][scriv-mode]] to keep track of my notes whilst writing. I now use Workspaces and Projects instead.
+
+Workspaces are similar to Linux Workspaces or Microsoft's multiple desktops.
+
+Projects are collections of files, originally intended for programming projects. I find projects ideal for writing projects. You can turn a directory into a project either adding version control such as git, or by adding an empty file named .projectile.
+
+Projects and Workspaces go together: open each project in its own workspace and then you can switch between projects/workspaces as you work.
+
+** Projects
+This document is part of a git project called emacs-writing which is ultimately pushed to GitHub.
+
+I don't like using git for my fiction writing, so I simply add an empty file called .projectile to my writing folder to turn it into a projectile project.
+
+Once I've opened my writing project the following keybindings are useful:
+
+- =SPC SPC= Find file in project
+- =SPC s p= helper function that does project wide consult-line search
+- =SPC u SPC f d= dired in a project
+- =SPC p i= Invalidate project cache (remove deleted files from project cache)
+
+** Project Agendas
+I wrote the following function to restrict the agenda to the current project. Bind the function to a key that calls org-agenda. You can see an example in my [[https://github.com/ballantony/doom-emacs-config/blob/main/config.el][config.el]] file
+
+
+#+begin_src lisp
+(defun tb/agenda-restrict-this-project ()
+    "Restrict agenda to current project"
+    (interactive)
+    (let ((org-agenda-files (list (projectile-project-root))))
+      (org-agenda)))
+#+end_src
+
+I rely a lot on this function.  When writing I hit =SPC j p p= (my keybinding) to see the TODOs and IN PROGRESSes for this project only.
+
+** Workspace
+Doom Emacs opens new projects in their own workspaces. Hitting SPC SPC when you first open Doom Emacs will look for a project, not a file.
+
+Useful keybindings:
+
+- =SPC SPC= find file in the current project
+- =SPC , or SPC b b= Helper function to switch to another buffer in the same workspace.
+- =SPC TAB TAB= to see workspaces currently open
+- =SPC TAB <num>= to switch to workspace <num>
+
+** Example Workflow
+The above might seem a bit complicated, so here's an example of how I might work.
+
+1) Open Emacs
+2) =SPC P P= to bring up a list of projects
+   #+begin_src
+~/projects/emacs-writing
+~/projects/example
+~/projects/writing
+   #+end_src
+3) Choose example project
+4) =SPC j p p= to show the agenda for the example project
+   #+begin_src org
+
+Todo:
+  penrose:    TODO Penrose Love
+  penrose:    TODO Armour Scene
+  threebears: TODO Who's been eating my porridge?
+
+==========================================================================
+In Progress:
+  penrose:    IN PROGRESS Penrose 3
+  threebears: IN PROGRESS Episode 1
+   #+end_src
+
+5) Choose a TODO or INPROGRESS and go to work.
+** Global, Workspace, Project, File
+One of the confusing things about Doom Emacs is knowing which command to use: Henrik has written a number of helper functions that modify the behaviour of familiar commands.
+
+I find it helpful to think about where I want to apply the command. For example, when I call find file do I want to look in the current project or everywhere?
+
+I've listed a few useful commands below:
+
+*** Global Commands
+- =SPC f f=  or =SPC .= Find file
+- =C-x d= dired
+- =SPC f d= default/dired
+    helper function that calls dired in a project if you call it with an argument
+- =SPC b B= or =C-x b consult-buffer=
+      More information than SPC b b. This will list buffers, a file history and bookmarks. Filter down to files with F SPC, b SPC for buffers, p SPC for projects
+- =SPC RET= or =C-x r b consult-bookmark=
+- =SPC b i= iBuffer
+*** File/Buffer/Directory
+- =SPC s s= +default/search-buffer
+  helper function that does consult-line search for the current file
+  - leave a space to search for two words any order
+  - cow.*see to search in that order
+- =SPC s j= +vertico/jump-list
+  helper function that goes to entry in evil's jump list
