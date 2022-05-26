@@ -295,8 +295,8 @@ And don't forget
 *** M-x consult-ripgrep
 For a more flexible search try consult-ripgrep. It's worth reading the documentation, but here's a taste:
 
-#alpha beta         : Search for alpha and beta in any order.
-#alpha.*beta        : Search for alpha before beta.
-#\(alpha\|beta\) : Search for alpha or beta (Note Emacs syntax!)
-#word -- -C3        : Search for word, include 3 lines as context
-#first#second       : Search for first, quick filter for second.
+- =#alpha beta=      Search for alpha and beta in any order.
+- =#alpha.*beta=     Search for alpha before beta.
+- =#\(alpha\|beta\)= Search for alpha or beta (Note Emacs syntax!)
+- =#word -- -C3=     Search for word, include 3 lines as context
+- =#first#second=    Search for first, quick filter for second.
