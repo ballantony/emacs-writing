@@ -265,3 +265,38 @@ I've listed a few useful commands below:
   - cow.*see to search in that order
 - =SPC s j= +vertico/jump-list
   helper function that goes to entry in evil's jump list
+
+* Getting Around: Searching and Jumping
+This section repeats things mentioned in previous sections. I've collected the notes here for convenience.
+
+A big part of writing is  putting the notes I've made into some sort of order. I spend a lot of time joining notes together to make scenes and then rearranging those scenes. Scrivener is good at the rearranging part ([[https://tech.tonyballantyne.com/emacs/workout/emacs-and-scrivener/][I've written about this here.]]) Where Scrivener falls down is the flexibility of search. Emacs allows me to home in on a scene, an idea or a sentence almost instantly.
+
+I copied some of my writing process from Scrivener's model, even going as far as writing a simple Emacs Scrivener mode.  Doom Emacs has rendered that unnecessary.  Tools like ripgrep and consult make it far quicker to find what I'm looking for. If you're unfamliar with the following commands, try them out. You'll be pleased that you did.
+
+One last thing. Doom Emacs calls different commands depending on which completion engine you're using. This means the search syntax may vary. I use the default (vertico at the time of writing) which means that searching for apples oranges will return lines containing apples and oranges. In other words: when searching, type one word for an initial selection, then a second to narrow it down.
+
+*** Searching in Projects
+- =SPC SPC= find file in project
+- =SPC s p= search project for text
+- =SPC s P= search another project for text
+- =SPC s d= search files in directory for text
+
+*** Searching in Buffers
+- =SPC s s= helper function search for text in current buffer. Matches are displayed in another window.
+- =SPC s j= helper function that goes to entry in evil's jump list
+- =SPC m .= Jump to org heading (uses consult-org-heading)
+
+And don't forget
+
+- =C-c C-j= org-goto
+*** Useful Tips
+- =SPC s o= Search online. t will search online dictionary, T thesaurus
+- Find an unmatched quote using this regex =^[^"]*"[^"]*$=
+*** M-x consult-ripgrep
+For a more flexible search try consult-ripgrep. It's worth reading the documentation, but here's a taste:
+
+#alpha beta         : Search for alpha and beta in any order.
+#alpha.*beta        : Search for alpha before beta.
+#\(alpha\|beta\) : Search for alpha or beta (Note Emacs syntax!)
+#word -- -C3        : Search for word, include 3 lines as context
+#first#second       : Search for first, quick filter for second.
