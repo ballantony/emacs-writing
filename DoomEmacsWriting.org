@@ -300,3 +300,44 @@ For a more flexible search try consult-ripgrep. It's worth reading the documenta
 - =#\(alpha\|beta\)= Search for alpha or beta (Note Emacs syntax!)
 - =#word -- -C3=     Search for word, include 3 lines as context
 - =#first#second=    Search for first, quick filter for second.
+* Two Windows
+I've experimented with all sorts of arrangements of windows over the years including those featured in [[https://github.com/ballantony/scriv-mode][scriv-mode]]
+
+Now I prefer to keep Emacs small (It's 80 columns wide for a reason). As I keep everything about a story in one file I will often clone the buffer and then narrow to appropriate part. This means that - whether working on a laptop or a big screen - I tend to only have two windows open.
+
+The following keybindings are useful when working with two windows
+
+- =SPC b C= or =C-x 4 c=  Clone current buffer: have two views on the same file
+- =SPC m s b= or =C-c C-x  b= Open headline in different window, or kill if already there.
+** Useful functions
+I use the following functions to quickly change the frame and font size.
+
+#+begin_src lisp
+(defun tb/set-small-screen ()
+  "Set the screen to something like regular emacs size."
+  (set-frame-size (selected-frame) 81 43))
+
+(defun tb/set-large-screen ()
+  "Set the screen to something like double regular emacs width."
+  (set-frame-size (selected-frame) 180 53))
+
+(defun tb/preferred-screen-size ()
+  "Set my preferred screen size."
+  (interactive)
+  (if (< (frame-width) 85)
+      (tb/set-large-screen)
+    (tb/set-small-screen)))
+
+(defun tb/set-font-size-big ()
+  (interactive)
+  "Set font to Courier 16"
+  (setq doom-font "Courier New-16")
+  (doom/reload-font)
+  (tb/set-small-screen))
+
+(defun tb/set-font-size-small ()
+  (interactive)
+  "Set font to Courier 14"
+  (setq doom-font "Courier New-14")
+  (doom/reload-font))
+#+end_src
